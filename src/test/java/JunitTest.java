@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class JunitTest {
@@ -15,19 +16,19 @@ public class JunitTest {
     }
 
     @Test
-    void FormTest() {
+    void formTest() {
         open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Nikita");
         $("#lastName").setValue("Kozhevnikov");
         $("#userEmail").setValue("kozherka2@gamil.com");
-        $("label[for='gender-radio-1']").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("9999999999");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("January");
         $(".react-datepicker__year-select").selectOption("2001");
         $(".react-datepicker__day--019:not(.react-datepicker__day--outside-month)").click();
         $("#subjectsInput").setValue("Maths").pressEnter();
-        $("label[for='hobbies-checkbox-1']").click();
+        $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("images/12.jpg");
         $("#currentAddress").setValue("Some address");
         $("#state").click();
@@ -38,20 +39,17 @@ public class JunitTest {
 
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        String[] expectedTexts = {
-                "Nikita Kozhevnikov",
-                "kozherka2@gamil.com",
-                "Male",
-                "9999999999",
-                "19 January,2001",
-                "Maths",
-                "Sports",
-                "12.jpg",
-                "Some address",
-                "NCR Delhi"
-        };
-        for (String text : expectedTexts) {$("div.table-responsive").shouldHave(text(text));
+        $(".modal-body").shouldHave(text("Nikita Kozhevnikov"));
+        $(".modal-body").shouldHave(text("kozherka2@gamil.com"));
+        $(".modal-body").shouldHave(text("Male"));
+        $(".modal-body").shouldHave(text("9999999999"));
+        $(".modal-body").shouldHave(text("19 January,2001"));
+        $(".modal-body").shouldHave(text("Maths"));
+        $(".modal-body").shouldHave(text("Sports"));
+        $(".modal-body").shouldHave(text("12.jpg"));
+        $(".modal-body").shouldHave(text("Some address"));
+        $(".modal-body").shouldHave(text("NCR Delhi"));
         }
 
     }
-}
+
