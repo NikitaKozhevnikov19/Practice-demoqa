@@ -1,8 +1,9 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -18,6 +19,8 @@ public class JunitTest {
     @Test
     void formTest() {
         open("https://demoqa.com/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Nikita");
         $("#lastName").setValue("Kozhevnikov");
         $("#userEmail").setValue("kozherka2@gamil.com");
