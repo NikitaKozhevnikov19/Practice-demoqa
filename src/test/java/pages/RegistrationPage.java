@@ -17,7 +17,7 @@ public class RegistrationPage {
             genderWrapper = $("#genterWrapper"),
             phoneInput = $("#userNumber"),
             dateOfBirthInput = $("#dateOfBirthInput"),
-            subjectInput =  $("#subjectsInput"),
+            subjectInput = $("#subjectsInput"),
             subjectOption = $("#react-select-2-option-0"),
             uploadPicture = $("#uploadPicture"),
             currentAddress = $("#currentAddress"),
@@ -65,7 +65,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setSubject(String value) {
+    public RegistrationPage setSubjects(String value) {
         subjectInput.setValue(value);
         subjectOption.click();
         return this;
@@ -106,6 +106,11 @@ public class RegistrationPage {
 
     public RegistrationPage checkValidation() {
         $(".was-validated").shouldBe(visible);
+        return this;
+    }
+
+    public RegistrationPage checkTitle() {
+        header.shouldHave(text("Practice Form"));
         return this;
     }
 }
