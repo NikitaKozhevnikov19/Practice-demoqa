@@ -1,13 +1,13 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
     private final SelenideElement header = $("h1"),
@@ -65,16 +65,24 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setSubjects(String value) {
+    public RegistrationPage setSubject(String value) {
         subjectInput.setValue(value);
-        subjectOption.click();
+        $$(".subjects-auto-complete__option")
+                .findBy(text(value))
+                .click();
         return this;
     }
 
+
+
     public RegistrationPage setHobby(String value) {
-        $(byText(value)).click();
+        SelenideElement hobbyLabel = $(byText(value));
+        hobbyLabel.scrollIntoView(true)
+                .shouldBe(Condition.visible);
+        executeJavaScript("arguments[0].click();", hobbyLabel);
         return this;
     }
+
 
     public RegistrationPage setPicture(String fileName) {
         uploadPicture.uploadFromClasspath("images/" + fileName);
