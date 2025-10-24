@@ -1,4 +1,3 @@
-
 package tests;
 
 import org.junit.jupiter.api.Test;
@@ -12,52 +11,34 @@ public class RegistrationWithFakerTests extends TestBase {
 
     @Test
     void successfulRegistrationTest() {
-
-
-        String firstName = TestData.getFirstNameFaker();
-        String lastName = TestData.getLastNameFaker();
-        String userEmail = TestData.getUserEmailFaker();
-        String userGender = TestData.getUserGenderFaker();
-        String userNumber = TestData.getUserPhoneNumbFaker();
-        String day = TestData.getDay();
-        String month = TestData.getMonth();
-        String year = TestData.getYear();
-        String userAddress = TestData.getUserAddressFaker();
-        String userSubjects = TestData.getUserSubjects();
-        String userHobbies = TestData.getUserHobbies();
-        String userPicture = TestData.getUserPicture();
-        String userState = TestData.getUserState();
-        String userCity = TestData.getUserCity(userState);
-
+        TestData data = new TestData(); // новый объект с Faker
 
         registrationPage.openPage()
-                .checkTitle()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setGender(userGender)
-                .setPhoneNumber(userNumber)
-                .setDateOfBirth(day, month, year)
-                .setSubjects(userSubjects)
-                .setHobby(userHobbies)
-                .setPicture(userPicture)
-                .setAddress(userAddress)
-                .setState(userState)
-                .setCity(userCity)
+                .setFirstName(data.firstName)
+                .setLastName(data.lastName)
+                .setEmail(data.email)
+                .setGender(data.gender)
+                .setPhoneNumber(data.phoneNumber)
+                .setDateOfBirth(data.day, data.month, data.year)
+                .setSubject(data.subject)
+                .setHobby(data.hobby)
+                .setPicture(data.avatar)
+                .setAddress(data.streetAddress)
+                .setState(data.state)
+                .setCity(data.city)
                 .submitForm();
 
-
         modalComponent.checkModalIsOpen()
-                .checkResult("Student Name", firstName + " " + lastName)
-                .checkResult("Student Email", userEmail)
-                .checkResult("Gender", userGender)
-                .checkResult("Mobile", userNumber)
-                .checkResult("Date of Birth", day + " " + month + "," + year)
-                .checkResult("Subjects", userSubjects)
-                .checkResult("Hobbies", userHobbies)
-                .checkResult("Picture", userPicture)
-                .checkResult("Address", userAddress)
-                .checkResult("State and City", userState + " " + userCity)
+                .checkResult("Student Name", data.firstName + " " + data.lastName)
+                .checkResult("Student Email", data.email)
+                .checkResult("Gender", data.gender)
+                .checkResult("Mobile", data.phoneNumber)
+                .checkResult("Date of Birth", data.birthDate)
+                .checkResult("Subjects", data.subject)
+                .checkResult("Hobbies", data.hobby)
+                .checkResult("Picture", data.avatar)
+                .checkResult("Address", data.streetAddress)
+                .checkResult("State and City", data.stateAndCity)
                 .closeModal();
     }
 }
