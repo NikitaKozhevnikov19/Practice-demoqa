@@ -29,9 +29,12 @@ public class RegistrationPage {
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
+        executeJavaScript("$('footer').remove();");
+        executeJavaScript("$('#fixedban').remove();");
         header.shouldHave(text("Practice Form"));
         return this;
     }
+
 
 
     public RegistrationPage setFirstName(String value) {
