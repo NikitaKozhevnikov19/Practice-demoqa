@@ -11,9 +11,10 @@ public class RegistrationWithFakerTests extends TestBase {
 
     @Test
     void successfulRegistrationTest() {
-        TestData data = new TestData(); // новый объект с Faker
+        TestData data = new TestData();
 
         registrationPage.openPage()
+                .removeBanners()
                 .setFirstName(data.firstName)
                 .setLastName(data.lastName)
                 .setEmail(data.email)
