@@ -41,8 +41,6 @@ public class RegistrationPage {
         return this;
     }
 
-
-
     public RegistrationPage setFirstName(String value) {
         firstNameInput.setValue(value);
         return this;
@@ -81,7 +79,6 @@ public class RegistrationPage {
                 .click();
         return this;
     }
-
 
 
     public RegistrationPage setHobby(String value) {
