@@ -52,7 +52,7 @@ public class JunitTest {
         $(".modal-body").shouldHave(text("12.jpg"));
         $(".modal-body").shouldHave(text("Some address"));
         $(".modal-body").shouldHave(text("NCR Delhi"));
-        }
-
     }
+
+}
 
