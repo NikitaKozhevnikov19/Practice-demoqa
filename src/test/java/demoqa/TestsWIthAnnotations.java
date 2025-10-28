@@ -44,7 +44,6 @@ public class TestsWIthAnnotations {
     }
 
 
-
     static Stream<Arguments> provideUsers() {
         return Stream.of(
                 org.junit.jupiter.params.provider.Arguments.of("nbuUser1", "wrongPass1"),
@@ -66,28 +65,33 @@ public class TestsWIthAnnotations {
     }
 
 
-
     enum TestUsers {
         USER1("nbuUser1"),
         USER2("nbuUser2"),
         USER3("nbuUser3");
 
         private final String username;
-        TestUsers(String username) { this.username = username; }
-        public String getUsername() { return username; }
+
+        TestUsers(String username) {
+            this.username = username;
         }
 
-        @ParameterizedTest(name = "Попытка входа с пользователем {0}")
-        @EnumSource(TestUsers.class)
-        void loginWithEnum(TestUsers user) {
-            open("https://demoqa.com/login");
-            $("#userName").setValue(user.getUsername());
-            $("#password").setValue("wrongPass");
-            $("#login").click();
-
-            $("#name").shouldHave(text("Invalid username or password!"));
+        public String getUsername() {
+            return username;
         }
     }
+
+    @ParameterizedTest(name = "Попытка входа с пользователем {0}")
+    @EnumSource(TestUsers.class)
+    void loginWithEnum(TestUsers user) {
+        open("https://demoqa.com/login");
+        $("#userName").setValue(user.getUsername());
+        $("#password").setValue("wrongPass");
+        $("#login").click();
+
+        $("#name").shouldHave(text("Invalid username or password!"));
+    }
+}
 
 
 
